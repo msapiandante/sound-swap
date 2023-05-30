@@ -3,16 +3,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const wishlistSchema = new Schema( {
-    album: {
-        type: Schema.Types.ObjectId,
-        ref: 'Album',
-        required: true
-    },
     dateAdded: {
+        type: Date,
+        default: Date.now
+    },
+    uploads: {
         type: Schema.Types.ObjectId,
-        ref: 'Date Added',
+        ref: 'Upload',
         required: true
-    }
+    }    
 });
 
 module.exports = Wishlist;
