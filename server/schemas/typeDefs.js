@@ -59,6 +59,8 @@ const typeDefs = gql`
     type Mutation {
         addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
 
+        login(email: String!, password: String!): Auth
+
         updateUser(firstName: String!, lastName: String!, email: String!, password: String!): User
 
         addOrder(uploads: [ID]!): Order
@@ -71,11 +73,9 @@ const typeDefs = gql`
         
         deleteUpload(id: ID!): Upload
         
-        addWishlist(uploads: [ID]!): Wishlist
+        addToWishlist(wishlist_id: ID!, upload_id: ID!): Wishlist
 
         deleteWishlist(uploads: [ID]!): Wishlist
-        
-        addToWishlist(wishlist_id: ID!, upload_id: ID!): Wishlist
         
         deleteFromWishlist(wishlist_id: ID!, upload_id: ID!): Wishlist
     }
