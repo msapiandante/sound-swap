@@ -17,7 +17,8 @@ import Profile from './pages/Profile';
 import Result from './pages/Result';
 import SingleRecord from './pages/SingleRecord';
 import Nav from './components/Nav';
-import Cart from './components/Cart'
+import Cart from './components/Cart';
+import { StoreProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
     uri: '/graphql',
@@ -43,7 +44,7 @@ const httpLink = createHttpLink({
       <ApolloProvider client={client}>
         <Router>
           <div>
-
+          <StoreProvider>
               <Nav />
               <Routes>
                 <Route 
@@ -75,7 +76,7 @@ const httpLink = createHttpLink({
                   element={<Cart />} 
                 />
               </Routes>
-
+              </StoreProvider>
           </div>
         </Router>
       </ApolloProvider>
