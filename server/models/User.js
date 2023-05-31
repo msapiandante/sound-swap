@@ -29,25 +29,12 @@ const userSchema = new Schema ({
         required: true,
         minlength: 8
     },
-    uploads: [
-        {
+    uploads: {
         type: Schema.Types.ObjectId,
         ref: 'Upload'
-        }
-],
-    orders: [
-        {
-        type: Schema.Types.ObjectId,
-        ref: 'Order'
-        }
-    ],
-
-    wishlist: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Wishlist'
-        }
-    ]
+    },
+    orders: [Order.Schema],
+    wishlist:[Wishlist.Schema]
 
 });
 //pre-save middleware for creating password

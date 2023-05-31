@@ -7,11 +7,11 @@ const wishlistSchema = new Schema( {
         type: Date,
         default: Date.now
     },
-    uploads: {
+    uploads: [{
         type: Schema.Types.ObjectId,
         ref: 'Upload',
         required: true
-    }    
+    }]   
 });
 
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
