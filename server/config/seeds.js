@@ -1,6 +1,7 @@
 const db = require('./connection');
 
-const { User, Upload, Genre } = require('../models');
+const { User, Upload, Genre} = require('../models');
+
 
 db.once('open', async () => {
     try {
@@ -44,7 +45,6 @@ db.once('open', async () => {
     } catch (err) {
         console.log(err)
     }
-
 
 })
 
