@@ -7,11 +7,11 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  uploads: {
+  uploads: [{
     type: Schema.Types.ObjectId,
     ref: 'Upload',
     required: true
-  }
+  }]
     
   
 });
