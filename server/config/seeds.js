@@ -1,15 +1,11 @@
 const db = require('./connection');
-<<<<<<< HEAD
+
 const { User, Upload, Genre } = require('../models');
-=======
-const { User, Upload, Genre} = require('../models');
->>>>>>> ddc29d1d922862df57040a54a1432dff374cdf62
 
 db.once('open', async () => {
     try {
         await User.deleteMany();
         await Upload.deleteMany();
-<<<<<<< HEAD
         await Genre.deleteMany();
 
         const genres = await Genre.insertMany([
@@ -41,17 +37,7 @@ db.once('open', async () => {
             { img: "url", album: "Wish You Were Here", artist: "Pink Floyd", price: 15.00, description: "mint condition", genre: genres[0] },
             { img: "url", album: "Starting Over", artist: "Chris Stapleton", price: 15.00, description: "mint condition", genre: genres[5] },
             { img: "url", album: "Doggystyle", artist: "Snoop Dogg", price: 15.00, description: "mint condition", genre: genres[7] }
-=======
 
-        const users = await User.insertMany([
-            { firstName: "Elva", lastName: "Rothman", email: "elva@gmail.com", password: "Nachonacho123" },
-
-        ])
-
-        const uploads = await Upload.insertMany([
-            { img: "url", album: "Bloom", artist: "Rüfus du Sol", price: 15.00, description: "mint condition" }
->>>>>>> ddc29d1d922862df57040a54a1432dff374cdf62
-        ])
 
         process.exit()
 
@@ -59,8 +45,6 @@ db.once('open', async () => {
         console.log(err)
     }
 
-<<<<<<< HEAD
+
 })
-=======
-})
->>>>>>> ddc29d1d922862df57040a54a1432dff374cdf62
+
