@@ -8,7 +8,7 @@ const typeDefs = gql`
         email: String 
         uploads: [Upload]
         orders: [Order]
-        wishlist: [Wishlist]
+        wishlist: Wishlist
     }
 
     type Upload {
@@ -72,8 +72,12 @@ const typeDefs = gql`
         deleteUpload(id: ID!): Upload
         
         addWishlist(uploads: [ID]!): Wishlist
+
+        deleteWishlist(uploads: [ID]!): Wishlist
         
-        deleteWishlist(id: ID!): Wishlist
+        addToWishlist(wishlist_id: ID!, upload_id: ID!): Wishlist
+        
+        deleteFromWishlist(wishlist_id: ID!, upload_id: ID!): Wishlist
     }
 `;
 
