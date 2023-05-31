@@ -141,14 +141,13 @@ const resolvers = {
             };
             throw new AuthenticationError('Oops! You need to log in!')
         },
-        updateUpload: async (parent, args, context) => {
-            if(context.user) {
-                const upload = await Upload
-            }
+        updateUpload: async (parent, {_id, quantity}) => {
+            const decrement = Math.abs(quantity) * -1;
+            return await Upload.findByIdAndUpdate(_id, {$inc: {quantity: decrement}}, {new: true});
             
         },
         deleteUpload: async () => {
-
+            
         },
         addWishList: async() => {
 
