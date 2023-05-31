@@ -33,8 +33,17 @@ const userSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'Upload'
     }],
-    orders: [Order.Schema],
-    wishlist: Wishlist.Schema
+    orders: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Order'
+        }
+    ],
+    wishlist:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Wishlist'
+        }]
 
 });
 //pre-save middleware for creating password
