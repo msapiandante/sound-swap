@@ -70,3 +70,23 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_ORDER = gql`
+  query getOrder($orderId: ID!) {
+    order(orderId: $orderId) {
+      _id
+      purchaseDate
+      uploads {
+        _id
+        name
+        description
+        price
+        quantity
+        image
+        genre {
+          _id
+          name
+        }
+      }
+    }
+  }
+`;
