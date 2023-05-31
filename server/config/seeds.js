@@ -1,5 +1,5 @@
 const db = require('./connection');
-const { User, Upload, Genre } = require('../models');
+const { User, Upload, Genre} = require('../models');
 
 db.once('open', async () => {
     try {
