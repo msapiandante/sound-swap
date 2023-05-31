@@ -37,7 +37,7 @@ db.once('open', async () => {
             { img: "url", album: "Wish You Were Here", artist: "Pink Floyd", price: 15.00, description: "mint condition", genre: genres[0] },
             { img: "url", album: "Starting Over", artist: "Chris Stapleton", price: 15.00, description: "mint condition", genre: genres[5] },
             { img: "url", album: "Doggystyle", artist: "Snoop Dogg", price: 15.00, description: "mint condition", genre: genres[7] }
-
+        ])
 
         process.exit()
 
