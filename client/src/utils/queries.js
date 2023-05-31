@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_UPLOADS = gql`
-  query getUploads($genre: ID) {
-   uploads(genre: $genre) {
+query getUpload($uploadId: ID!) {
+    upload(uploadId: $uploadId) { 
       _id
       name
       description
@@ -15,9 +15,9 @@ export const QUERY_UPLOADS = gql`
     }
   }
 `;
-
+ 
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($uploadss: [ID]!) {
+  query getCheckout($uploads: [ID]!) {
     checkout(uploads: $uploads) {
       session
     }
@@ -26,7 +26,7 @@ export const QUERY_CHECKOUT = gql`
 
 export const QUERY_ALL_UPLOADS = gql`
   {
-    uploadss {
+    uploads {
       _id
       name
       description
@@ -56,15 +56,17 @@ export const QUERY_USER = gql`
       orders {
         _id
         purchaseDate
-        uploads {
+      }
+     uploads {
           _id
           name
           description
           price
           quantity
           image
-        }
+        
       }
     }
   }
 `;
+
