@@ -14,7 +14,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-import Result from './pages/Result';
 import SingleRecord from './pages/SingleRecord';
 import Nav from './components/Nav';
 import Cart from './components/Cart';
@@ -62,10 +61,6 @@ const httpLink = createHttpLink({
                 <Route 
                   path="/profile" 
                   element={<Profile />} 
-                />
-                <Route 
-                  path="/results" 
-                  element={<Result />} 
                 />
                 <Route 
                   path="/results/:id" 
