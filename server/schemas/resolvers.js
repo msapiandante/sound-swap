@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Upload, Genre, Order, WishList } = require("../models");
+const { User, Upload, Genre, Order} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")(
   "sk_test_51NDWu1BPxAL3HDjsQQ3kXJEnJ0p9TqMP00mB3u1doMGDCxbMupRTJhbfiAHSTCLi4E9t7XtCbPdHSpaM4by6We1800P4e2ARKt"
@@ -41,7 +41,7 @@ const resolvers = {
       ) => {
       if (context.user) {
         
-      const user = await User.findById(context.user._id).populate('wishlist').populate('uploads').populate('orders').populate({path: 'wishlist', populate: 'uploads'}).populate({path: 'orders', populate: 'uploads'});
+      const user = await User.findById(context.user._id).populate('uploads').populate('orders').populate({path: 'orders', populate: 'uploads'});
         
       return user;
       }
@@ -172,39 +172,6 @@ const resolvers = {
         );
       }
       throw new AuthenticationError("Oops! You need to be logged in!");
-    },
-    addToWishlist: async (parent, { uploads }, context) => {
-      if (context.user) {
-        const wishlist = new WishList({ uploads });
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { wishlist: wishlist },
-        });
-
-        return wishlist;
-      }
-      throw new AuthenticationError("Oops! You need to be logged in!");
-    },
-    deleteWishlist: async (parent, { wishlistId }, context) => {
-      if (context.user) {
-        const wishlist = await WishList.findOneAndDelete({
-          _id: wishlistId,
-        });
-        return await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { wishlist: wishlist._id } }
-        );
-      }
-      throw new AuthenticationError("Oops! You need to be logged in!");
-    },
-    deleteFromWishlist: async (parent, { uploadId }, context) => {
-      if (context.user) {
-        const upload = await Upload.findOneAndDelete({ _id: uploadId });
-        return await WishList.findOneAndUpdate(
-          { _id: wishlist._id },
-          { $pull: { uploads: upload } },
-          { new: true }
-        );
-      }
     },
   },
 };

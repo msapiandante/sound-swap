@@ -70,7 +70,7 @@ export const reducer = (state, action) => {
     case UPDATE_GENRE:
       return {
         ...state,
-        genres: [...action.genre],
+        genres: [...action.genres],
       };
 
     case UPDATE_CURRENT_GENRE:

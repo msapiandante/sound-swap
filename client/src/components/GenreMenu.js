@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useStoreContext } from '../../utils/GlobalState';
+import { useStoreContext } from '../utils/GlobalState';
 import {
   UPDATE_GENRE,
   UPDATE_CURRENT_GENRE,
-} from '../../utils/actions';
-import { QUERY_GENRE } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
+} from '../utils/actions';
+import { QUERY_GENRE } from '../utils/queries';
+import { idbPromise } from '../utils/helpers';
 
 function GenreMenu() {
   const [state, dispatch] = useStoreContext();

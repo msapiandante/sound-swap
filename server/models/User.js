@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 //require bcrypt for password hashing
 const bcrypt = require('bcrypt');
-//require schemas and models 
-const Order = require('./Order');
-const Upload = require('./Upload');
-const Wishlist = require('./Wishlist')
 //create user schema
 const userSchema = new Schema ({
     firstName: {
@@ -38,12 +34,7 @@ const userSchema = new Schema ({
             type: Schema.Types.ObjectId,
             ref: 'Order'
         }
-    ],
-    wishlist:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Wishlist'
-        }]
+    ]
 
 });
 //pre-save middleware for creating password

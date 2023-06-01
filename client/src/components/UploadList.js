@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import UploadItem from '../components/UploadItem';
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_UPLOADS } from '../../utils/actions';
+import UploadItem from './UploadItem';
+import { useStoreContext } from '../utils/GlobalState';
+import { UPDATE_UPLOADS } from '../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_UPLOADS } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
+import { QUERY_ALL_UPLOADS } from '../utils/queries';
+import { idbPromise } from '../utils/helpers';
 
 function UploadList() {
     const [state, dispatch] = useStoreContext();
 
     const { currentGenre } = state;
 
-    const { loading, data } = useQuery(QUERY_UPLOADS);
+    const { loading, data } = useQuery(QUERY_ALL_UPLOADS);
 
     useEffect(() => {
         if (data) {
