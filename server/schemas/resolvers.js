@@ -25,33 +25,27 @@ const resolvers = {
       return await Upload.find(params).populate("genre");
     },
     upload: async (parent, { _id }) => {
-      return await Upload.findById(_id).populate("genre");
+      return await Upload.findById(_id).populate('genre');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: "orders.uploads",
-          populate: "genre",
+          path: 'orders.uploads',
+          populate: 'genre',
         });
         return await user.orders.id(_id);
       }
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    user: async (parent, args, context) => {
+    user: async (parent, args, context
+      ) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate(
-          {
-            path: "wishlist.uploads",
-            populate: "genre",
-          },
-          {
-            path: "uploads",
-            populate: "genre",
-          }
-          //put order here? or keep under order
-        );
-        return user.wishlist.id(_id) && user.uploads.id(_id);
+        
+      const user = await User.findById(context.user._id).populate('wishlist').populate('uploads').populate('orders').populate({path: 'wishlist', populate: 'uploads'}).populate({path: 'orders', populate: 'uploads'});
+        
+      return user;
       }
+
       throw new AuthenticationError("Oops! You need to log in!");
     },
     checkout: async (parent, args, context) => {
