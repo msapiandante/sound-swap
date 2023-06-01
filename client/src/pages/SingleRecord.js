@@ -7,7 +7,7 @@ import { UPDATE_UPLOADS } from '../utils/actions';
 import { QUERY_UPLOADS } from '../utils/queries';
 //import spinner from '../assets/spinner.gif';
 
-function Detail() {
+function SingleRecord() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
@@ -56,4 +56,4 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default SingleRecord;
