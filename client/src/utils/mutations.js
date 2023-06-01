@@ -18,21 +18,21 @@ export const UPDATE_USER = gql`
 }
 `;
 export const ADD_ORDER = gql`
-  mutation addOrder($uploads = [ID]!) {
+  mutation addOrder($uploads: [ID]!) {
   addOrder(uploads: $uploads) {
     uploads 
   }
 }
 `;
   export const DELETE_ORDER = gql`
-    mutation deleteOrder($uploads = [ID]!) {
+    mutation deleteOrder($uploads: [ID]!) {
     deleteOrder(uploads: $uploads) {
         uploads
     }
 }
 `;
 export const ADD_UPLOAD = gql`
-  mutation addUpload($img = String!, $album = String!, $artist = String!, $price = Float!, $description = String!, $genre = ID!) {
+  mutation addUpload($img: String!, $album: String!, $artist: String!, $price: Float!, $description: String!, $genre: ID!) {
     addUpload(img: $img, album: $album, artist: $artist, price: $price, description: $description, genre: $genre) {
     img
     album
@@ -43,7 +43,7 @@ export const ADD_UPLOAD = gql`
 }
 `;
 export const UPDATE_UPLOAD = gql`
-  mutation updateUpload($id = ID!, $img = String, $album = String, $artist, $price = Float, description: String, genre: ID) {
+  mutation updateUpload($id: ID!, $img: String, $album: String, $artist: String, $price: Float, $description: String, $genre: ID) {
     updateUpload(ID: $id, img: $img, album: $album, artist: $artist, price: $price, description: $description, genre: $genre) {
         ID
         img
@@ -56,14 +56,14 @@ export const UPDATE_UPLOAD = gql`
 }
 `;
 export const DELETE_UPLOAD = gql`
-  mutation deleteUpload($id = ID!) {
+  mutation deleteUpload($id: ID!) {
     deleteUpload(ID: $id) {
         ID
     }
 }
 `;
 export const LOGIN = gql`
-  mutation login($email = String!, $password = String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         email
         password
@@ -71,14 +71,14 @@ export const LOGIN = gql`
 }
 `;
 export const DELETE_WISHLIST = gql`
-  mutation deleteWishlist($uploads = [ID]!) {
+  mutation deleteWishlist($upload: [ID]!) {
   deleteWishlist(uploads: $uploads) {
     uploads
   }
 }
 `;
 export const ADD_TO_WISHLIST = gql`
-  mutation addToWishlist($wishlist_id = ID!, $upload_id = ID!) {
+  mutation addToWishlist($wishlist_id: ID!, $upload_id: ID!) {
     addToWishlist(wishlist_id: $wishlist_id, upload_id: $upload_id) {
         wishlist_id
         upload_id
@@ -86,7 +86,7 @@ export const ADD_TO_WISHLIST = gql`
 }
 `;
 export const DELETE_FROM_WISHLIST = gql`
-    mutation deleteFromWishlist($wishlist_id = ID!, $upload_id = ID!) {
+    mutation deleteFromWishlist($wishlist_id: ID!, $upload_id: ID!) {
   deleteFromWishList(wishlist_id: $wishlist_id, upload_id: $upload_id) {
     wishlist_id
     upload_id
