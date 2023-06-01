@@ -52,7 +52,7 @@ const CartItem = ({ upload }) => {
             value={upload.purchaseQuantity}
             onChange={onChange}
           />
-          <span aria-label="trash" onClick={() => removeFromCart(upload)}>
+          <span onClick={() => removeFromCart(upload)}>
             <FontAwesomeIcon icon={faTrashCan} />
           </span>
         </div>
