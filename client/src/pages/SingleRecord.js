@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { useStoreContext } from '../utils/GlobalState';
 import { UPDATE_UPLOADS } from '../utils/actions';
-import { QUERY_UPLOADS } from '../utils/queries';
-//import spinner from '../assets/spinner.gif';
+import { QUERY_UPLOAD } from '../utils/queries';
 
 function SingleRecord() {
   const [state, dispatch] = useStoreContext();
@@ -13,7 +12,7 @@ function SingleRecord() {
 
   const [currentUpload, setCurrentUpload] = useState({});
 
-  const { loading, data } = useQuery(QUERY_UPLOADS);
+  const { loading, data } = useQuery(QUERY_UPLOAD);
 
   const { uploads } = state;
 
@@ -51,7 +50,7 @@ function SingleRecord() {
           />
         </div>
       ) : null}
-      {loading ? <img src={spinner} alt="loading" /> : null}
+      {loading ? <p>loading</p> : null}
     </>
   );
 }
