@@ -9,18 +9,12 @@ const Form = () => {
         description: '',
         genre: ''
     });
-    const [formErrors, setFormErrors] = useState({
-        img: '',
-        album: '',
-        artist: '',
-        price: '',
-        description: '',
-        genre: ''
-    });
+    const [formErrors, setFormErrors] = useState(
+        {}
+    );
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-        setFormErrors({ ...formErrors, [e.target.name]: '' });
+        setFormData({ ...formData, [e.target.name]: [e.target.value] })
     };
 
     const handleSubmit = (e) => {
