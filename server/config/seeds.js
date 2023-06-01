@@ -20,9 +20,9 @@ db.once('open', async () => {
 
         ])
 
-        const uploads = Upload.insertMany([
+        const uploads = await Upload.insertMany([
             {
-                img: "",
+                img: "BackInBlack.jpeg",
                 album: "Back in Black",
                 artist: "AC/DC",
                 price: 25.00,
@@ -30,153 +30,176 @@ db.once('open', async () => {
                 genre: genres[0]
             },
             {
-                img: "",
+                img: "SomeGirls.jpeg",
                 album: "Some Girls",
                 artist: "The Rolling Stones",
                 price: 30.50,
+                description: "mint condition",
                 genre: genres[0]
             },
             {
-                img: "",
+                img: "WishYouWereHere.jpeg",
                 album: "Wish You Were Here",
                 artist: "Pink Floyd",
                 price: 35.00,
+                description: "mint condition",
                 genre: genres[0]
             },
             {
-                img: "",
+                img: "Biomorph.jpeg",
                 album: "Biomorph",
                 artist: "Enrico Sangiuliano",
                 price: 30.00,
+                description: "mint condition",
                 genre: genres[3]
             },
             {
-                img: "",
+                img: "Butterflies.jpeg",
                 album: "Butterflies",
                 artist: "Boris Brejcha",
                 price: 29.99,
+                description: "mint condition",
                 genre: genres[3]
             },
             {
-                img: "",
+                img: "PartsOfLife.jpeg",
                 album: "Parts of Life",
                 artist: "Paul Kalkbrenner",
                 price: 25.00,
+                description: "mint condition",
                 genre: genres[3]
             },
             {
-                img: "",
+                img: "Californication.jpeg",
                 album: "Californication",
                 artist: "Red Hot Chili Peppers",
                 price: 25.50,
+                description: "mint condition",
                 genre: genres[1]
             },
             {
-                img: "",
+                img: "AudioSlave.jpeg",
                 album: "Audioslave",
                 artist: "Audioslave",
                 price: 20.00,
+                description: "mint condition",
                 genre: genres[1]
             },
             {
-                img: "",
+                img: "YoungerNow.jpeg",
                 album: "Younger Now",
                 artist: "Miley Cyrus",
                 price: 30.00,
+                description: "mint condition",
                 genre: genres[2]
             },
             {
-                img: "",
+                img: "FineLine.jpeg",
                 album: "Fine Line",
                 artist: "Harry Styles",
                 price: 30.00,
+                description: "mint condition",
                 genre: genres[2]
             },
             {
-                img: "",
+                img: "Uncaged.jpeg",
                 album: "Uncaged",
                 artist: "Zac Brown Band",
                 price: 25.00,
+                description: "mint condition",
                 genre: genres[4]
             },
             {
-                img: "",
+                img: "Purgatory.jpeg",
                 album: "Purgatory",
                 artist: "Tyler Childers",
                 price: 30.00,
+                description: "mint condition",
                 genre: genres[4]
             },
             {
-                img: "",
+                img: "iam>iwas.jpeg",
                 album: "i am > i was",
                 artist: "21 Savage",
                 price: 40.00,
+                description: "mint condition",
                 genre: genres[5]
             },
             {
-                img: "",
+                img: "NothingWasTheSame.jpeg",
                 album: "Nothing Was The Same",
                 artist: "Drake",
                 price: 100.00,
+                description: "mint condition",
                 genre: genres[5]
             },
             {
-                img: "",
+                img: "PaintingPictures.jpeg",
                 album: "Painting Pictures",
                 artist: "Kodak Black",
                 price: 599.99,
+                description: "mint condition",
                 genre: genres[5]
             },
             {
-                img: "",
+                img: "KindOfBlue.jpeg",
                 album: "Kind of Blue",
                 artist: "Miles Davis",
                 price: 60.00,
+                description: "mint condition",
                 genre: genres[6]
             },
             {
-                img: "",
+                img: "WhatAWonderfulWorld.jpeg",
                 album: "What a Wonderful World",
                 artist: "Louis Armstrong",
                 price: 75.00,
+                description: "mint condition",
                 genre: genres[6]
             },
             {
-                img: "",
+                img: "Ctrl.jpeg",
                 album: "Ctrl",
                 artist: "SZA",
                 price: 40.00,
+                description: "mint condition",
                 genre: genres[7]
             },
             {
-                img: "",
+                img: "LateNights.jpeg",
                 album: "Late Nights",
                 artist: "Jeremih",
                 price: 10.00,
+                description: "mint condition",
                 genre: genres[7]
             },
             {
-                img: "",
+                img: "TheFourSeasons.jpeg",
                 album: "The Four Seasons",
                 artist: "Antonio Vivaldi",
                 price: 69.00,
+                description: "mint condition",
                 genre: genres[8]
             },
             {
-                img: "",
+                img: "UnaMattina.jpeg",
                 album: "Una Mattina",
                 artist: "Ludovico Einaudi",
                 price: 46.90,
+                description: "mint condition",
                 genre: genres[8]
             },
             {
-                img: "",
+                img: "ANTI.jpeg",
                 album: "ANTI",
                 artist: "Rihanna",
                 price: 2.00,
+                description: "mint condition",
                 genre: genres[7]
             },
         ])
+
+        console.log(uploads)
 
         await User.insertMany([
             { 
@@ -198,11 +221,7 @@ db.once('open', async () => {
                     uploads[10]._id,
 
                 ],
-                orders: [
-                    {
-                        uploads: [uploads[16]._id, uploads[21]._id]
-                    }
-                ] 
+                orders: [uploads[16]._id, uploads[21]._id],
             },
             { 
                 firstName: "Izzie", 
@@ -223,11 +242,7 @@ db.once('open', async () => {
                     uploads[21]._id,
 
                 ],
-                orders: [
-                    {
-                        uploads: [uploads[6]._id, uploads[2]._id]
-                    }
-                ]   
+                orders: [uploads[6]._id, uploads[2]._id]
             },
         ])
 
