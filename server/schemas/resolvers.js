@@ -112,16 +112,6 @@ const resolvers = {
   
         return { token, user };
       },
-    updateUser: async (parent, args
-       //,context
-       ) => {
-    //if (context.user) {
-        return await User.findByIdAndUpdate('6479f1aed7fb346cbb19ccf8', args, {
-          new: true,
-        });
-      //}
-      throw new AuthenticationError("Oops! You need to log in!");
-    },
     //returning null
     addOrder: async (parent, { uploads }
       //, context
@@ -135,23 +125,6 @@ const resolvers = {
 
         return order;
       //}
-      throw new AuthenticationError("Oops! You need to log in!");
-    },
-    //issues
-    deleteOrder: async (parent, { orderId }
-      //,context
-      ) => {
-    //console.log(context);
-      //if (context.user) {
-        const order = await Order.findOneAndDelete({
-          _id: orderId,
-        });
-        await User.findOneAndUpdate(
-          { _id: '6479f1aed7fb346cbb19ccf8'},
-          { $pull: { orders: order } }
-        );
-        return order;
-    //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //genre returning null
