@@ -3,7 +3,7 @@ import UploadItem from './UploadItem';
 import { useStoreContext } from '../utils/GlobalState';
 import { UPDATE_UPLOADS } from '../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_UPLOADS } from '../utils/queries';
+import { QUERY_UPLOADS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 
 function UploadList() {
@@ -11,7 +11,7 @@ function UploadList() {
 
     const { currentGenre } = state;
 
-    const { loading, data } = useQuery(QUERY_ALL_UPLOADS);
+    const { loading, data } = useQuery(QUERY_UPLOADS);
 
     useEffect(() => {
         if (data) {
@@ -51,7 +51,7 @@ function UploadList() {
                         <UploadItem
                             key={upload._id}
                             _id={upload._id}
-                            image={upload.img}
+                            img={upload.img}
                             album={upload.album}
                             artist={upload.artist}
                             price={upload.price}

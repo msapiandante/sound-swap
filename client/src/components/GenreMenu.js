@@ -19,9 +19,9 @@ function GenreMenu() {
     if (genreData) {
       dispatch({
         type: UPDATE_GENRE,
-        genres: genreData.genres,
+        genres: genreData.genre,
       });
-      genreData.genres.forEach((genre) => {
+      genreData.genre.forEach((genre) => {
         idbPromise('genres', 'put', genre);
       });
     } else if (!loading) {

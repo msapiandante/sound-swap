@@ -70,7 +70,7 @@ const resolvers = {
           imgs: [`${url}/imgs/${uploads[i].img}`],
         });
 
-        const price = await stripe.prieces.create({
+        const price = await stripe.prices.create({
           upload: upload.id,
           unit_amount: uploads[i].price * 100,
           currency: "usd",
