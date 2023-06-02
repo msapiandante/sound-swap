@@ -45,7 +45,7 @@ const resolvers = {
       ) => {
       //if (context.user) {
         
-      const user = await User.findById('647a1139e9c4a77b1641eaf4').populate('uploads').populate('orders').populate({path: 'orders.uploads', populate: 'genre'})
+      const user = await User.findById('647a1139e9c4a77b1641eaf4').populate('uploads').populate('orders').populate({path: 'orders', populate: 'uploads'})
         console.log(user)
       return user;
     //}
@@ -154,7 +154,7 @@ const resolvers = {
     //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    //working now--genre returning null
+    //genre returning null
     addUpload: async (parent, args
       //, context
       ) => {
@@ -171,17 +171,17 @@ const resolvers = {
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //changed params for now.... we will see how this plays out
-    updateUpload: async (parent, {description, price}
+    updateUpload: async (parent, args
       //,context
       ) => {
     //if (context.user) {
-       const upload = await Upload.findOneAndUpdate({_id: id}, {description, price}, { new: true });
+       const upload = await Upload.findOneAndUpdate({_id: id}, args, { new: true });
 
        return upload;
       //}
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
-    //good
+
     deleteUpload: async (parent, { uploadId }
       //, context
       ) => {
