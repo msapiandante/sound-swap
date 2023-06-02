@@ -40,6 +40,7 @@ const Cart = () => {
     let sum = 0;
     console.log(state.cart)
     state.cart.forEach((upload) => {
+      console.log(upload)
       sum += upload.price * upload.purchaseQuantity;
     });
     return sum.toFixed(2);
@@ -62,7 +63,7 @@ const Cart = () => {
       {state.cart.length ? (
         <div>
           {state.cart.map((upload) => (
-            <CartItem key={upload} upload={upload} />
+            <CartItem key={upload._id} upload={upload} />
           ))}
           <div className="flex-row space-between">
             <strong>Total: ${calculateTotal()}</strong>
