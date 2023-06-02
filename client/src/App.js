@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import SingleRecord from './pages/SingleRecord';
 import Nav from './components/Nav';
 import Cart from './components/Cart';
+import Form from './pages/Form';
 import { StoreProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
@@ -65,6 +66,10 @@ const httpLink = createHttpLink({
                 <Route 
                   path="/results/:id" 
                   element={<SingleRecord />} 
+                />
+                <Route
+                  path="/form"
+                  element={<Form />}
                 />
                 <Route 
                   path="/cart" 

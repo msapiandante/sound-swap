@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import UploadItem from '../components/UploadItem';
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_UPLOADS } from '../../utils/actions';
+import UploadItem from './UploadItem';
+import { useStoreContext } from '../utils/GlobalState';
+import { UPDATE_UPLOADS } from '../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_UPLOADS } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
+import { QUERY_UPLOADS } from '../utils/queries';
+import { idbPromise } from '../utils/helpers';
 
 function UploadList() {
     const [state, dispatch] = useStoreContext();
@@ -51,7 +51,7 @@ function UploadList() {
                         <UploadItem
                             key={upload._id}
                             _id={upload._id}
-                            image={upload.img}
+                            img={upload.img}
                             album={upload.album}
                             artist={upload.artist}
                             price={upload.price}
