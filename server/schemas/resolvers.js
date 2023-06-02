@@ -29,7 +29,7 @@ const resolvers = {
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
+        const user = await User.findById("64793bfa62dc2a48f92080ce").populate({
           path: 'orders.uploads',
           populate: 'genre',
         });
@@ -37,14 +37,14 @@ const resolvers = {
       }
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    user: async (parent, args, context
-      ) => {
+    //returning null
+    user: async (parent, args ,context) => {
       if (context.user) {
         
       const user = await User.findById(context.user._id).populate('uploads').populate('orders').populate({path: 'orders', populate: 'uploads'});
         
       return user;
-      }
+    }
 
       throw new AuthenticationError("Oops! You need to log in!");
     },
@@ -109,8 +109,8 @@ const resolvers = {
         return { token, user };
       },
   
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
+    updateUser: async (parent, args ,context) => {
+    if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
           new: true,
         });
@@ -129,8 +129,8 @@ const resolvers = {
       }
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    deleteOrder: async (parent, { orderId }, context) => {
-      console.log(context);
+    deleteOrder: async (parent, { orderId },context) => {
+    console.log(context);
       if (context.user) {
         const order = await Order.findOneAndDelete({
           _id: orderId,
@@ -140,12 +140,14 @@ const resolvers = {
           { $pull: { orders: order._id } }
         );
         return order;
-      }
+    }
       throw new AuthenticationError("Oops! You need to log in!");
     },
+    //genre only populated sometimes with id? 
     addUpload: async (parent, args, context) => {
       if (context.user) {
         const upload = await Upload.create(args);
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { uploads: upload._id } }
@@ -155,9 +157,12 @@ const resolvers = {
       }
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    updateUpload: async (parent, args, context) => {
-      if (context.user) {
-        return Upload.findOneAndUpdate(context.user._id, args, { new: true });
+    //issue with creating upload, what to put for params
+    updateUpload: async (parent, args,context) => {
+    if (context.user) {
+       const upload = await Upload.findOneAndUpdate(args, { new: true });
+
+       return upload;
       }
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
