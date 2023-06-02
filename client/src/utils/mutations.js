@@ -68,7 +68,7 @@ export const ADD_UPLOAD = gql`
 `;
 export const UPDATE_UPLOAD = gql`
   mutation updateUpload(
-    $id:ID!
+    $id: ID
     $img: String
     $album: String
     $artist: String
@@ -77,7 +77,7 @@ export const UPDATE_UPLOAD = gql`
     $genre: ID
   ) {
     updateUpload(
-      ID: $id
+      id: $id
       img: $img
       album: $album
       artist: $artist
@@ -85,7 +85,7 @@ export const UPDATE_UPLOAD = gql`
       description: $description
       genre: $genre
     ) {
-        ID
+        _id
         img
         album
         artist
@@ -97,8 +97,8 @@ export const UPDATE_UPLOAD = gql`
 `;
 export const DELETE_UPLOAD = gql`
   mutation deleteUpload($id: ID!) {
-    deleteUpload(ID: $id) {
-        ID
+    deleteUpload(id: $id) {
+        _id
     }
 }
 `;
