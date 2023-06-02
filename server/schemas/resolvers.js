@@ -137,8 +137,8 @@ const resolvers = {
     },
     //changed params for now.... we will see how this plays out
     updateUpload: async (parent, args, context) => {
-    if (context.user) {
-       const upload = await Upload.findOneAndUpdate({_id: id}, args, { new: true });
+  if (context.user) {
+       const upload = await Upload.findOneAndUpdate({_id: args.id}, args, { new: true });
 
        return upload;
       }
