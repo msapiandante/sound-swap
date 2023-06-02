@@ -7,6 +7,7 @@ query getUploads($genre: ID) {
       album
       description
       price
+      artist
       img
       genre {
         _id
@@ -30,6 +31,7 @@ export const QUERY_ALL_UPLOADS = gql`
       album
       artist
       description
+      img
       price
       genre {
         _id

@@ -51,7 +51,7 @@ function UploadList() {
                         <UploadItem
                             key={upload._id}
                             _id={upload._id}
-                            image={upload.img}
+                            img={upload.img}
                             album={upload.album}
                             artist={upload.artist}
                             price={upload.price}
