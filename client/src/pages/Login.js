@@ -48,7 +48,7 @@ function Login(props) {
         <div className="flex-row space-between my-2">
           <label htmlFor="pwd">Password:</label>
           <input
-            placeholder="******"
+            placeholder="*********"
             name="password"
             type="password"
             id="pwd"

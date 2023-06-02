@@ -6,6 +6,7 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         email: String 
+        password: String
         uploads: [Upload]
         orders: [Order]
     }

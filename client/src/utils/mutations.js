@@ -39,6 +39,7 @@ export const ADD_UPLOAD = gql`
     artist
     price
     description
+    genre
     }
 }
 `;
