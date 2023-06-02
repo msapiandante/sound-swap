@@ -27,28 +27,24 @@ const resolvers = {
       return await Upload.findById(_id).populate('genre');
     },
     //issues with the user.orders.id is not a function
-    order: async (parent, { _id }
-      //, context
-      ) => {
-      //if (context.user) {
-        const user = await User.findById('6479f1aed7fb346cbb19ccf8').populate({
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
           path: 'orders.uploads',
           populate: 'genre',
         });
         return user.orders.id(_id);
-      //}
+      }
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //orders returning as an empty array, uploads are working though
-    user: async (parent, args 
-      //,context
-      ) => {
-      //if (context.user) {
+    user: async (parent, args, context) => {
+      if (context.user) {
         
-      const user = await User.findById('647a1139e9c4a77b1641eaf4').populate('uploads').populate('orders').populate({path: 'orders', populate: 'uploads'})
+      const user = await User.findById(context.user._id).populate('uploads').populate('orders').populate({path: 'orders', populate: 'uploads'})
         console.log(user)
       return user;
-    //}
+    }
 
       throw new AuthenticationError("Oops! You need to log in!");
     },
@@ -112,88 +108,53 @@ const resolvers = {
   
         return { token, user };
       },
-    updateUser: async (parent, args
-       //,context
-       ) => {
-    //if (context.user) {
-        return await User.findByIdAndUpdate('6479f1aed7fb346cbb19ccf8', args, {
-          new: true,
-        });
-      //}
-      throw new AuthenticationError("Oops! You need to log in!");
-    },
     //returning null
-    addOrder: async (parent, { uploads }
-      //, context
-      ) => {
-      //console.log(context);
-      //if (context.user) {
+    addOrder: async (parent, { uploads }, context) => {
+      console.log(context);
+      if (context.user) {
         const order = new Order({ uploads });
-        await User.findByIdAndUpdate('6479fd6c066ae4fc121d1cc5', {
+        await User.findByIdAndUpdate(context.user._id, {
           $push: { orders: order },
         });
 
         return order;
-      //}
-      throw new AuthenticationError("Oops! You need to log in!");
-    },
-    //issues
-    deleteOrder: async (parent, { orderId }
-      //,context
-      ) => {
-    //console.log(context);
-      //if (context.user) {
-        const order = await Order.findOneAndDelete({
-          _id: orderId,
-        });
-        await User.findOneAndUpdate(
-          { _id: '6479f1aed7fb346cbb19ccf8'},
-          { $pull: { orders: order } }
-        );
-        return order;
-    //}
+      }
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //genre returning null
-    addUpload: async (parent, args
-      //, context
-      ) => {
-      //if (context.user) {
+    addUpload: async (parent, args, context) => {
+      if (context.user) {
         const upload = await Upload.create(args);
 
         await User.findOneAndUpdate(
-          { id: '6479fd6c066ae4fc121d1cc5'},
+          { id: context.user._id},
           { $push: { uploads: upload } }
         );
 
         return upload;
-      //}
+      }
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //changed params for now.... we will see how this plays out
-    updateUpload: async (parent, args
-      //,context
-      ) => {
-    //if (context.user) {
+    updateUpload: async (parent, args, context) => {
+    if (context.user) {
        const upload = await Upload.findOneAndUpdate({_id: id}, args, { new: true });
 
        return upload;
-      //}
+      }
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
 
-    deleteUpload: async (parent, { uploadId }
-      //, context
-      ) => {
-      //if (context.user) {
+    deleteUpload: async (parent, { uploadId }, context) => {
+      if (context.user) {
         const upload = await Upload.findOneAndDelete({
           _id: uploadId,
         });
         return await User.findOneAndUpdate(
-          { id: '6479f1aed7fb346cbb19ccf8' },
+          { id: context.user._id },
           { $pull: { uploads: upload } }
         );
-     // }
+     }
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
   },

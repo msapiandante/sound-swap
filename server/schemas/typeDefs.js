@@ -55,11 +55,7 @@ const typeDefs = gql`
 
         login(email: String!, password: String!): Auth
 
-        updateUser(firstName: String!, lastName: String!, email: String!, password: String!): User
-
         addOrder(uploads: [ID]!): Order
-
-        deleteOrder(uploads: [ID]!): Order
 
         addUpload(img: String!, album: String!, artist: String!, price: Float!, description: String!, genre: ID!): Upload
         
