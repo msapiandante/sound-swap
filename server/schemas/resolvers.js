@@ -9,9 +9,11 @@ const stripe = require("stripe")(
 //add upload, delete upload, find genre, delete user
 const resolvers = {
   Query: {
+    //working
     genre: async () => {
       return await Genre.find();
     },
+    //working
     uploads: async (parent, { genre, album }) => {
       const params = {};
       if (genre) {
@@ -24,12 +26,14 @@ const resolvers = {
       }
       return await Upload.find(params).populate("genre");
     },
+    //working
     upload: async (parent, { _id }) => {
       return await Upload.findById(_id).populate('genre');
     },
+    //need to check but user issues precented
     order: async (parent, { _id }, context) => {
       if (context.user) {
-        const user = await User.findById("64793bfa62dc2a48f92080ce").populate({
+        const user = await User.findById(context.user._id).populate({
           path: 'orders.uploads',
           populate: 'genre',
         });
@@ -85,6 +89,7 @@ const resolvers = {
   },
 
   Mutation: {
+    //like half working, was working and i was able to get a user id but then something else became null
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -108,7 +113,7 @@ const resolvers = {
   
         return { token, user };
       },
-  
+  //again, some issues with it 
     updateUser: async (parent, args ,context) => {
     if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -143,7 +148,7 @@ const resolvers = {
     }
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    //genre only populated sometimes with id? 
+    //genre only populated sometimes with id? worked otherwise
     addUpload: async (parent, args, context) => {
       if (context.user) {
         const upload = await Upload.create(args);
@@ -157,10 +162,10 @@ const resolvers = {
       }
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    //issue with creating upload, what to put for params
+    //changed params for now.... we will see how this plays out
     updateUpload: async (parent, args,context) => {
     if (context.user) {
-       const upload = await Upload.findOneAndUpdate(args, { new: true });
+       const upload = await Upload.findByIdAndUpdate(_id, args, { new: true });
 
        return upload;
       }
