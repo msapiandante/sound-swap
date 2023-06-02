@@ -16,7 +16,7 @@ const CartItem = ({ upload }) => {
   };
 //do not think this is neccesary
   const onChange = (e) => {
-    const value = e.taarget.value;
+    const value = e.target.value;
     if (value === "0") {
       dispatch({
         type: REMOVE_FROM_CART,
@@ -48,7 +48,7 @@ const CartItem = ({ upload }) => {
           <span>Qty:</span>
           <input
             type="number"
-            placeholder="1"
+            placeholder="0"
             value={upload.purchaseQuantity}
             onChange={onChange}
           />

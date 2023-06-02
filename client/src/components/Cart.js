@@ -38,6 +38,7 @@ const Cart = () => {
   //most likely do not need to multiply by upload.purchaseQuantity
   function calculateTotal() {
     let sum = 0;
+    console.log(state.cart)
     state.cart.forEach((upload) => {
       sum += upload.price * upload.purchaseQuantity;
     });
@@ -48,7 +49,7 @@ const Cart = () => {
 
     state.cart.forEach((upload) => {
       for (let i = 0; i < upload.purchaseQuantity; i++) {
-        uploadIds.push(upload._id);
+        uploadIds.push(upload);
       }
     });
     getCheckout({
@@ -61,7 +62,7 @@ const Cart = () => {
       {state.cart.length ? (
         <div>
           {state.cart.map((upload) => (
-            <CartItem key={upload._id} upload={upload} />
+            <CartItem key={upload} upload={upload} />
           ))}
           <div className="flex-row space-between">
             <strong>Total: ${calculateTotal()}</strong>
