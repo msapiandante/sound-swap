@@ -14,6 +14,7 @@ An online marketplace to buy and sell records, albums, and CDs. Users can upload
 [Bootstrap](https://getbootstrap.com/)
 [Apollo](https://www.apollographql.com/docs/apollo-server/v3/)
 [Fontawesome](https://fontawesome.com/)
+[Cloudinary](https://cloudinary.com/)
 
 ## Usage
 //insert screenshot of app 
