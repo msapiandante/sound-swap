@@ -18,32 +18,33 @@ export const UPDATE_USER = gql`
 }
 `;
 export const ADD_ORDER = gql`
-  mutation addOrder($uploads: [ID]!) {
+  mutation addOrder($uploads:[ID]!) {
   addOrder(uploads: $uploads) {
     uploads 
   }
 }
 `;
   export const DELETE_ORDER = gql`
-    mutation deleteOrder($uploads: [ID]!) {
+    mutation deleteOrder($uploads:[ID]!) {
     deleteOrder(uploads: $uploads) {
         uploads
     }
 }
 `;
 export const ADD_UPLOAD = gql`
-  mutation addUpload($img: String!, $album: String!, $artist: String!, $price: Float!, $description: String!, $genre: ID!) {
+  mutation addUpload($img: String!, $album: String!, $artist: String!, $price: Float!, $description: String!, $genre:ID!) {
     addUpload(img: $img, album: $album, artist: $artist, price: $price, description: $description, genre: $genre) {
     img
     album
     artist
     price
     description
+    genre
     }
 }
 `;
 export const UPDATE_UPLOAD = gql`
-  mutation updateUpload($id: ID!, $img: String, $album: String, $artist: String, $price: Float, $description: String, $genre: ID) {
+  mutation updateUpload($id:ID!, $img: String, $album: String, $artist: String, $price: Float, $description: String, $genre: ID) {
     updateUpload(ID: $id, img: $img, album: $album, artist: $artist, price: $price, description: $description, genre: $genre) {
         ID
         img
@@ -68,28 +69,5 @@ export const LOGIN = gql`
         email
         password
     }
-}
-`;
-export const DELETE_WISHLIST = gql`
-  mutation deleteWishlist($upload: [ID]!) {
-  deleteWishlist(uploads: $uploads) {
-    uploads
-  }
-}
-`;
-export const ADD_TO_WISHLIST = gql`
-  mutation addToWishlist($wishlist_id: ID!, $upload_id: ID!) {
-    addToWishlist(wishlist_id: $wishlist_id, upload_id: $upload_id) {
-        wishlist_id
-        upload_id
-    }
-}
-`;
-export const DELETE_FROM_WISHLIST = gql`
-    mutation deleteFromWishlist($wishlist_id: ID!, $upload_id: ID!) {
-  deleteFromWishList(wishlist_id: $wishlist_id, upload_id: $upload_id) {
-    wishlist_id
-    upload_id
-  }
 }
 `;

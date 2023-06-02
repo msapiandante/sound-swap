@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Upload, Genre, Order, WishList } = require("../models");
+const { User, Upload, Genre, Order} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")(
   "sk_test_51NDWu1BPxAL3HDjsQQ3kXJEnJ0p9TqMP00mB3u1doMGDCxbMupRTJhbfiAHSTCLi4E9t7XtCbPdHSpaM4by6We1800P4e2ARKt"
@@ -9,9 +9,11 @@ const stripe = require("stripe")(
 //add upload, delete upload, find genre, delete user
 const resolvers = {
   Query: {
+    //working
     genre: async () => {
       return await Genre.find();
     },
+    //working
     uploads: async (parent, { genre, album }) => {
       const params = {};
       if (genre) {
@@ -24,27 +26,33 @@ const resolvers = {
       }
       return await Upload.find(params).populate("genre");
     },
+    //working
     upload: async (parent, { _id }) => {
       return await Upload.findById(_id).populate('genre');
     },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
+    //issues with the user.orders.id is not a function
+    order: async (parent, { _id }
+      //, context
+      ) => {
+      //if (context.user) {
+        const user = await User.findById('6479f1aed7fb346cbb19ccf8').populate({
           path: 'orders.uploads',
           populate: 'genre',
         });
         return await user.orders.id(_id);
-      }
+      //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    user: async (parent, args, context
+    //orders returning as an empty array, uploads are working though
+    user: async (parent, args 
+      //,context
       ) => {
-      if (context.user) {
+      //if (context.user) {
         
-      const user = await User.findById(context.user._id).populate('wishlist').populate('uploads').populate('orders').populate({path: 'wishlist', populate: 'uploads'}).populate({path: 'orders', populate: 'uploads'});
+      const user = await User.findById('6479f1aed7fb346cbb19ccf8').populate('uploads').populate('orders').populate({path: 'orders', populate: 'uploads'});
         
       return user;
-      }
+    //}
 
       throw new AuthenticationError("Oops! You need to log in!");
     },
@@ -62,7 +70,7 @@ const resolvers = {
           imgs: [`${url}/imgs/${uploads[i].img}`],
         });
 
-        const price = await stripe.prieces.create({
+        const price = await stripe.prices.create({
           upload: upload.id,
           unit_amount: uploads[i].price * 100,
           currency: "usd",
@@ -85,12 +93,14 @@ const resolvers = {
   },
 
   Mutation: {
+    //working
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
+    //working
     login: async (parent, { email, password }) => {
         const user = await User.findOne({ email });
   
@@ -108,103 +118,90 @@ const resolvers = {
   
         return { token, user };
       },
-  
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, {
+  //working
+    updateUser: async (parent, args
+       //,context
+       ) => {
+    //if (context.user) {
+        return await User.findByIdAndUpdate('6479f1aed7fb346cbb19ccf8', args, {
           new: true,
         });
-      }
+      //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    addOrder: async (parent, { uploads }, context) => {
-      console.log(context);
-      if (context.user) {
+    //returning null
+    addOrder: async (parent, { uploads }
+      //, context
+      ) => {
+      //console.log(context);
+      //if (context.user) {
         const order = new Order({ uploads });
-        await User.findByIdAndUpdate(context.user._id, {
+        await User.findByIdAndUpdate('6479f1aed7fb346cbb19ccf8', {
           $push: { orders: order },
         });
 
         return order;
-      }
+      //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    deleteOrder: async (parent, { orderId }, context) => {
-      console.log(context);
-      if (context.user) {
+    //issues
+    deleteOrder: async (parent, { orderId }
+      //,context
+      ) => {
+    //console.log(context);
+      //if (context.user) {
         const order = await Order.findOneAndDelete({
           _id: orderId,
         });
         await User.findOneAndUpdate(
-          { _id: context.user._id },
+          { _id: '6479f1aed7fb346cbb19ccf8'},
           { $pull: { orders: order._id } }
         );
         return order;
-      }
+    //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    addUpload: async (parent, args, context) => {
-      if (context.user) {
+    //genre only populated sometimes with id? worked otherwise
+    //not working now
+    addUpload: async (parent, args
+      //, context
+      ) => {
+      //if (context.user) {
         const upload = await Upload.create(args);
+
         await User.findOneAndUpdate(
-          { _id: context.user._id },
+          { _id: '6479f1aed7fb346cbb19ccf8d'},
           { $push: { uploads: upload._id } }
         );
 
         return upload;
-      }
+      //}
       throw new AuthenticationError("Oops! You need to log in!");
     },
-    updateUpload: async (parent, args, context) => {
-      if (context.user) {
-        return Upload.findOneAndUpdate(context.user._id, args, { new: true });
-      }
+    //changed params for now.... we will see how this plays out
+    updateUpload: async (parent, args
+      //,context
+      ) => {
+    //if (context.user) {
+       const upload = await Upload.findByIdAndUpdate({_id}, args, { new: true });
+
+       return upload;
+      //}
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
-    deleteUpload: async (parent, { uploadId }, context) => {
-      if (context.user) {
+    deleteUpload: async (parent, { uploadId }
+      //, context
+      ) => {
+      //if (context.user) {
         const upload = await Upload.findOneAndDelete({
           _id: uploadId,
         });
         return await User.findOneAndUpdate(
-          { _id: context.user._id },
+          { _id: '6479f1aed7fb346cbb19ccf8' },
           { $pull: { uploads: upload._id } }
         );
-      }
+     // }
       throw new AuthenticationError("Oops! You need to be logged in!");
-    },
-    addToWishlist: async (parent, { uploads }, context) => {
-      if (context.user) {
-        const wishlist = new WishList({ uploads });
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { wishlist: wishlist },
-        });
-
-        return wishlist;
-      }
-      throw new AuthenticationError("Oops! You need to be logged in!");
-    },
-    deleteWishlist: async (parent, { wishlistId }, context) => {
-      if (context.user) {
-        const wishlist = await WishList.findOneAndDelete({
-          _id: wishlistId,
-        });
-        return await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { wishlist: wishlist._id } }
-        );
-      }
-      throw new AuthenticationError("Oops! You need to be logged in!");
-    },
-    deleteFromWishlist: async (parent, { uploadId }, context) => {
-      if (context.user) {
-        const upload = await Upload.findOneAndDelete({ _id: uploadId });
-        return await WishList.findOneAndUpdate(
-          { _id: wishlist._id },
-          { $pull: { uploads: upload } },
-          { new: true }
-        );
-      }
     },
   },
 };

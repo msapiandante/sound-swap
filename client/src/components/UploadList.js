@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import UploadItem from '../components/UploadItem';
+import UploadItem from './UploadItem';
 import { useStoreContext } from '../utils/GlobalState';
 import { UPDATE_UPLOADS } from '../utils/actions';
 import { useQuery } from '@apollo/client';

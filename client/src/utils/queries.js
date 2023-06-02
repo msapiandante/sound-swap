@@ -1,14 +1,13 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_UPLOADS = gql`
-query getUpload($uploadId: ID!) {
-    upload(uploadId: $uploadId) { 
+query getUploads($genre: ID) {
+    uploads(genre: $genre) { 
       _id
-      name
+      album
       description
       price
-      quantity
-      image
+      img
       genre {
         _id
       }
@@ -28,11 +27,12 @@ export const QUERY_ALL_UPLOADS = gql`
   {
     uploads {
       _id
-      name
+      album
+      artist
       description
       price
-      quantity
       genre {
+        _id
         name
       }
     }
@@ -59,11 +59,11 @@ export const QUERY_USER = gql`
       }
      uploads {
           _id
-          name
+          album
+          artist
           description
           price
-          quantity
-          image
+          img
         
       }
     }
@@ -77,11 +77,11 @@ export const QUERY_ORDER = gql`
       purchaseDate
       uploads {
         _id
-        name
+        album
+        artist
         description
         price
-        quantity
-        image
+        img
         genre {
           _id
           name
