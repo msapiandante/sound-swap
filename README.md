@@ -3,17 +3,17 @@
 An online marketplace to buy and sell records, albums, and CDs. Users can upload records they own and sell to other users, as well as buy records that have been uploaded to the marketplace. Over the past 10 years, the resurgence of vinyls  has led individuals to search out records from their favorite artists, both past and present. Formulating a marketplace that caters to individuals who want to buy and sell records not only garners a sense of community, but also creates  a singularized place users can visit where vinyls can be exchanged.  
 
 ## Technologies 
-[React]()
-[GraphQL]()
-[Node.js]()
-[Express.js]()
-[MongoDB]()
-[Mongoose]()
-[Heroku]()
-[Stripe]()
-[Bootstrap]()
-[Apollo]()
-[Fontawesome]()
+[React](https://legacy.reactjs.org/docs/getting-started.html)
+[GraphQL](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/)
+[Node.js](https://coding-boot-camp.github.io/full-stack/nodejs/how-to-install-nodejs)
+[Express.js](https://expressjs.com/)
+[MongoDB](https://www.mongodb.com/)
+[Mongoose](https://www.npmjs.com/package/mongoose)
+[Heroku](https://www.heroku.com/what)
+[Stripe](https://stripe.com/)
+[Bootstrap](https://getbootstrap.com/)
+[Apollo](https://www.apollographql.com/docs/apollo-server/v3/)
+[Fontawesome](https://fontawesome.com/)
 
 ## Usage
 //insert screenshot of app 
