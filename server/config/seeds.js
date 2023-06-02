@@ -1,11 +1,12 @@
 const db = require("./connection");
-const { User, Upload, Genre } = require("../models");
+const { User, Upload, Genre, Order} = require("../models");
 
 db.once("open", async () => {
   try {
     await User.deleteMany();
     await Upload.deleteMany();
     await Genre.deleteMany();
+    await Order.deleteMany();
 
     const genres = await Genre.insertMany([
       { name: "Rock" }, //0
@@ -198,6 +199,11 @@ db.once("open", async () => {
       },
     ]);
 
+    const order = await Order.create({
+        uploads: [uploads[6]._id, uploads[2]._id]
+    })
+
+
     console.log(uploads);
     await User.create({
       firstName: "Derek",
@@ -238,7 +244,7 @@ db.once("open", async () => {
         uploads[20]._id,
         uploads[21]._id,
       ],
-      orders: [uploads[6]._id, uploads[2]._id],
+      orders: order,
     });
 
     process.exit();
