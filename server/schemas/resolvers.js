@@ -59,7 +59,7 @@ const resolvers = {
         const upload = await stripe.products.create({
           album: uploads[i].album,
           description: uploads[i].description,
-          imgs: [`${url}/imgs/${uploads[i].img}`],
+          imgs: [`${url}/images/${uploads[i].img}`],
         });
 
         const price = await stripe.prices.create({

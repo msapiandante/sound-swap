@@ -85,6 +85,18 @@ body {
     border-radius: 50px;
 }
 
+.add-cart-button:hover {
+    background-color: rgb(173, 53, 9);
+}
+
+.cart-remove-button:hover {
+    background-color: rgb(173, 53, 9);
+}
+
+.single-button:not([disabled]):hover {
+    background-color: rgb(173, 53, 9);
+}
+
 .card {
     margin-bottom: .3rem;
 }
@@ -115,4 +127,14 @@ button {
 .profile-card {
     background-color:rgb(253, 242, 234);
     width: 10rem;
+}
+
+.single-rec-container {
+    display:flex;
+    flex-direction: row;
+}
+
+.col-container {
+    display: flex;
+    flex-direction: column;
 }

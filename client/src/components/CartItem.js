@@ -53,7 +53,7 @@ const CartItem = ({ upload }) => {
             value={upload.purchaseQuantity}
             onChange={onChange}
           /> */}
-        <button onClick={() => removeFromCart(upload)}>
+        <button className="cart-remove-button" onClick={() => removeFromCart(upload)}>
           <FontAwesomeIcon icon={faTrashCan} />
         </button>
 
