@@ -21,8 +21,6 @@ function Profile() {
         </Link>
         {user ? (
           <>
-            {/* <h2>{user.firstName}'s WishList</h2> */}
-            {/* <h3>{user.wishlist}</h3> wishlist component?*/}
             <h2 style={{textAlign: "center"}}>{user.firstName}'s Uploads</h2>
             <div className='record-container'>
               <div className="container">
