@@ -20,20 +20,40 @@ function Profile() {
         </Link>
         {user ? (
           <>
-            <h2>{user.firstName}'s WishList</h2>
+            {/* <h2>{user.firstName}'s WishList</h2> */}
             {/* <h3>{user.wishlist}</h3> wishlist component?*/}
-            <h2>{user.firstName}'s Uploads</h2>
-            {user.uploads.map((upload) => (
-              <div key={upload._id} className="my-2">
-                <h3>
-                  <img src={upload.img} alt={upload.album} />
-                  {upload.album} {upload.artist} {upload.genre}
-                  {upload.description}
-                </h3>
-                <h4>{upload.price}</h4>
+            <h2 style={{textAlign: "center"}}>{user.firstName}'s Uploads</h2>
+            <div className='record-container'>
+              <div className="container">
+                <div className='row'>
+                  {user.uploads.map((upload) => (
+                    // <div className="col-md-3">
+                      <div className="col-6 col-md-4 col-lg-2 mb-4">
+                        <div className='card profile-card'>
+                          <Link to={`/products/${upload._id}`} style={{ textDecoration: 'none' }}>
+                            {/*                 
+                    <h3> */}
+                            <img src={`/images/${upload.img}`} alt={upload.album} style={{ width: '10rem' }}/>
+                            <p className="card-title upload-text">{upload.album}</p>
+                            <p className="card-title upload-text">{upload.artist} </p>
+                            {/* {upload.album} {upload.artist} {upload.genre}
+                      {upload.description}
+                    </h3> */}
+                            {/* <h4>{upload.price}</h4> */}
+
+                          </Link>
+                        </div>
+                      </div>
+                    // </div>
+
+                  ))}
+
+                </div>
               </div>
-            ))}
-            <h2>{user.firstName}'s Order History</h2>
+            </div>
+
+{/* Order history not styled yet */}
+            <h2 style={{textAlign: "center"}}>{user.firstName}'s Order History</h2>
             {user.orders.map((order) => (
               <div key={order._id} className="my-2">
                 <h3>

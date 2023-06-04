@@ -43,11 +43,13 @@ function UploadList() {
     }
 
     return (
-        <div>
-            <h2>Records</h2>
+        <div className='record-container'>
+            {/* <h2>Records</h2> */}
             {state.uploads.length ? (
-                <div>
+                <div className="container">
+                <div className='row'>
                     {filterUploads().map((upload) => (
+                        <div className="col-md-3" key={upload._id}>
                         <UploadItem
                             key={upload._id}
                             _id={upload._id}
@@ -56,7 +58,9 @@ function UploadList() {
                             artist={upload.artist}
                             price={upload.price}
                         />
+                        </div>
                     ))}
+                </div>
                 </div>
             ) : (
                 <h3>No records to see here</h3>

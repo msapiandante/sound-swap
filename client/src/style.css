@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+80s+Fade&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: rgb(253, 242, 234);
+    color: rgb(242, 70, 7) !important;
+}
+
+/* header { */
+    /* background-color: rgb(242, 70, 7); */
+    /* rgb(252, 164, 85); */
+    /* color:  rgb(255, 243, 187); */
+/* } */
+
+.header-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    margin-right: auto;
+}
+
+.header-right {
+    margin-left: auto;
+}
+
+.nav-cont {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-brand::after {
+    content: "";
+    display: block; 
+    height: .3rem;
+    width: 10rem;
+    background-color: rgb(242, 70, 7);
+}
+
+.navbar-brand {
+    font-family: 'Rubik 80s Fade', cursive;
+    font-size: 50px;
+}
+
+.upload-card {
+    width: 18rem !important;
+    background-color:rgb(253, 242, 234)
+}
+
+.record-container {
+    padding-top: 3rem;
+}
+
+.genre-container {
+    display: flex;
+    justify-content: center;
+}
+
+.genre-button {
+    padding: .75rem;
+    margin: 1rem;
+    background-color: rgb(242, 70, 7);
+    color:  rgb(255, 243, 187);
+    border: none;
+    border-radius: 50px;
+}
+
+.upload-text {
+    text-align: center;
+    color:rgb(242, 70, 7) !important;
+}
+
+.add-cart-button {
+    background-color: rgb(242, 70, 7);
+    color:  rgb(255, 243, 187);
+    border: none;
+    border-radius: 50px;
+}
+
+.card {
+    margin-bottom: .3rem;
+}
+
+.card:hover {
+    transform: translate3D(0,-1px,0) scale(1.03);
+    box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+    transition: all .4s ease;
+    cursor: grab;
+}
+
+.genre-button:hover {
+    transform: translate3D(0,-1px,0) scale(1.03);
+    box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+    transition: all .4s ease;
+    cursor: grab;
+}
+
+button {
+    padding: .75rem;
+    margin: 1rem;
+    background-color: rgb(242, 70, 7);
+    color:  rgb(255, 243, 187);
+    border: none;
+    border-radius: 50px;
+}
+
+.profile-card {
+    background-color:rgb(253, 242, 234);
+    width: 10rem;
+}

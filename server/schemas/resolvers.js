@@ -56,7 +56,7 @@ const resolvers = {
       const { uploads } = await order.populate("uploads");
 
       for (let i = 0; i < uploads.length; i++) {
-        const upload = await stripe.uploads.create({
+        const upload = await stripe.products.create({
           album: uploads[i].album,
           description: uploads[i].description,
           imgs: [`${url}/imgs/${uploads[i].img}`],

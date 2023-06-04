@@ -22,6 +22,7 @@ const Cart = () => {
     if (data) {
       stripePromise.then((res) => {
         res.redirectToCheckout({ sessionId: data.checkout.session });
+        
       });
     }
   }, [data]);
@@ -41,7 +42,7 @@ const Cart = () => {
     console.log(state.cart)
     state.cart.forEach((upload) => {
       console.log(upload)
-      sum += upload.price * upload.purchaseQuantity;
+      sum += upload.price;
     });
     return sum.toFixed(2);
   }
@@ -49,9 +50,9 @@ const Cart = () => {
     const uploadIds = [];
 
     state.cart.forEach((upload) => {
-      for (let i = 0; i < upload.purchaseQuantity; i++) {
+
         uploadIds.push(upload);
-      }
+      
     });
     getCheckout({
       variables: { uploads: uploadIds },
@@ -59,13 +60,14 @@ const Cart = () => {
   }
   return (
     <div className="cart">
-      <h2>Cart</h2>
+      <h2 style={{textAlign: "center"}}>Cart</h2>
       {state.cart.length ? (
-        <div>
+        <div className="container">
+        <div className="row">
           {state.cart.map((upload) => (
             <CartItem key={upload._id} upload={upload} />
           ))}
-          <div className="flex-row space-between">
+          <div className="flex-row space-between" style={{textAlign: "center"}}>
             <strong>Total: ${calculateTotal()}</strong>
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
@@ -74,8 +76,9 @@ const Cart = () => {
             )}
           </div>
         </div>
+        </div>
       ) : (
-        <h3>
+        <h3 style={{textAlign: "center"}}>
           Your cart is empty! <FontAwesomeIcon icon={faFaceSadCry} />
         </h3>
       )}
