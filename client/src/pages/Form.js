@@ -27,10 +27,10 @@ const Form = () => {
         event.preventDefault();
         console.log(formData);
         try {
-            const {data} = await addUpload({
+         const upload= await addUpload({
                 variables: {...formData}
             });
-                return data;
+                return upload;
         } catch (error) {
             console.error(error)
         }
@@ -82,9 +82,9 @@ const Form = () => {
     //         return;
     //     }
 
-    //     // Perform upload logic or send the formData to the server
+         // Perform upload logic or send the formData to the server
     //     console.log(formData);
-    //     // Reset the form after submission
+         // Reset the form after submission
     //     setFormData({
     //         img: '',
     //         album: '',
@@ -105,7 +105,7 @@ const Form = () => {
             ) : (
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
-                <label htmlFor="img" className="form-label">
+                <label className="form-label">
                     Image URL:
                 </label>
                 <input
@@ -118,7 +118,7 @@ const Form = () => {
                 {/* {formErrors.img && <div className="invalid-feedback">{formErrors.img}</div>} */}
             </div>
             <div className="mb-3">
-                <label htmlFor="album" className="form-label">
+                <label className="form-label">
                     Album:
                 </label>
                 <input
@@ -131,7 +131,7 @@ const Form = () => {
                 {/* {formErrors.album && <div className="invalid-feedback">{formErrors.album}</div>} */}
             </div>
             <div className="mb-3">
-                <label htmlFor="artist" className="form-label">
+                <label className="form-label">
                     Artist:
                 </label>
                 <input
@@ -144,7 +144,7 @@ const Form = () => {
                 {/* {formErrors.artist && <div className="invalid-feedback">{formErrors.artist}</div>} */}
             </div>
             <div className="mb-3">
-                <label htmlFor="price" className="form-label">
+                <label className="form-label">
                     Price:
                 </label>
                 <input
@@ -157,7 +157,7 @@ const Form = () => {
                 {/* {formErrors.price && <div className="invalid-feedback">{formErrors.price}</div>} */}
             </div>
             <div className="mb-3">
-                <label htmlFor="description" className="form-label">
+                <label className="form-label">
                     Description:
                 </label>
                 <textarea
@@ -169,7 +169,7 @@ const Form = () => {
                 {/* {formErrors.description && <div className="invalid-feedback">{formErrors.description}</div>} */}
             </div>
             <div className="mb-3">
-                <label htmlFor="genre" className="form-label">
+                <label className="form-label">
                     Genre:
                 </label>
                 <input
