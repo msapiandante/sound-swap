@@ -1,73 +1,108 @@
 import React, { useState } from 'react';
+import {useMutation} from '@apollo/client';
+import {ADD_UPLOAD} from '../utils/mutations';
+import {Link} from 'react-router-dom';
 
 const Form = () => {
     const [formData, setFormData] = useState({
         img: '',
         album: '',
         artist: '',
-        price: 0,
+        price: '',
         description: '',
         genre: ''
     });
-    const [formErrors, setFormErrors] = useState(
-        {}
-    );
+    const [addUpload, {error, data}] = useMutation(ADD_UPLOAD)
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: [e.target.value] })
+    const handleChange = (event) => {
+       const {name, value} = event.target;
+
+       setFormData({
+        ...formData,
+        [name]: value,
+       });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        let errors = {};
-        let hasErrors = false;
-
-        // Check for null values
-        if (formData.img.trim() === '') {
-            errors.img = 'Image URL is required';
-            hasErrors = true;
-        }
-        if (formData.album.trim() === '') {
-            errors.album = 'Album is required';
-            hasErrors = true;
-        }
-        if (formData.artist.trim() === '') {
-            errors.artist = 'Artist is required';
-            hasErrors = true;
-        }
-        if (formData.price === 0) {
-            errors.price = 'Price is required';
-            hasErrors = true;
-        }
-        if (formData.description.trim() === '') {
-            errors.description = 'Description is required';
-            hasErrors = true;
-        }
-        if (formData.genre.trim() === '') {
-            errors.genre = 'Genre is required';
-            hasErrors = true;
-        }
-
-        if (hasErrors) {
-            setFormErrors(errors);
-            return;
-        }
-
-        // Perform upload logic or send the formData to the server
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         console.log(formData);
-        // Reset the form after submission
-        setFormData({
-            img: '',
-            album: '',
-            artist: '',
-            price: 0,
-            description: '',
-            genre: ''
-        });
+        try {
+            const {data} = await addUpload({
+                variables: {...formData}
+            });
+                return data;
+        } catch (error) {
+            console.error(error)
+        }
     };
+
+    // const [formErrors, setFormErrors] = useState(
+    //     {}
+    // );
+
+    // const handleChange = (e) => {
+    //     setFormData({ ...formData, [e.target.name]: [e.target.value] })
+    // };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    
+    //     const {data} = await addUpload
+    //     let errors = {};
+    //     let hasErrors = false;
+
+    //     // Check for null values
+    //     if (formData.img.trim() === '') {
+    //         errors.img = 'Image URL is required';
+    //         hasErrors = true;
+    //     }
+    //     if (formData.album.trim() === '') {
+    //         errors.album = 'Album is required';
+    //         hasErrors = true;
+    //     }
+    //     if (formData.artist.trim() === '') {
+    //         errors.artist = 'Artist is required';
+    //         hasErrors = true;
+    //     }
+    //     if (formData.price === 0) {
+    //         errors.price = 'Price is required';
+    //         hasErrors = true;
+    //     }
+    //     if (formData.description.trim() === '') {
+    //         errors.description = 'Description is required';
+    //         hasErrors = true;
+    //     }
+    //     if (formData.genre.trim() === '') {
+    //         errors.genre = 'Genre is required';
+    //         hasErrors = true;
+    //     }
+
+    //     if (hasErrors) {
+    //         setFormErrors(errors);
+    //         return;
+    //     }
+
+    //     // Perform upload logic or send the formData to the server
+    //     console.log(formData);
+    //     // Reset the form after submission
+    //     setFormData({
+    //         img: '',
+    //         album: '',
+    //         artist: '',
+    //         price: 0,
+    //         description: '',
+    //         genre: ''
+    //     });
+    // };
 
     return (
         <div className='container my-1'>
+            {data ? (
+                <p>
+                    Succesfully uploaded! You may now head {''}
+                    <Link to='/profile'>back to your profile</Link>
+                </p>
+            ) : (
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label htmlFor="img" className="form-label">
@@ -75,13 +110,12 @@ const Form = () => {
                 </label>
                 <input
                     type="text"
-                    id="img"
                     name="img"
                     value={formData.img}
                     onChange={handleChange}
-                    className={`form-control ${formErrors.img && 'is-invalid'}`}
+                    className='form-control'
                 />
-                {formErrors.img && <div className="invalid-feedback">{formErrors.img}</div>}
+                {/* {formErrors.img && <div className="invalid-feedback">{formErrors.img}</div>} */}
             </div>
             <div className="mb-3">
                 <label htmlFor="album" className="form-label">
@@ -89,13 +123,12 @@ const Form = () => {
                 </label>
                 <input
                     type="text"
-                    id="album"
                     name="album"
                     value={formData.album}
                     onChange={handleChange}
-                    className={`form-control ${formErrors.album && 'is-invalid'}`}
+                    className='form-control'
                 />
-                {formErrors.album && <div className="invalid-feedback">{formErrors.album}</div>}
+                {/* {formErrors.album && <div className="invalid-feedback">{formErrors.album}</div>} */}
             </div>
             <div className="mb-3">
                 <label htmlFor="artist" className="form-label">
@@ -103,13 +136,12 @@ const Form = () => {
                 </label>
                 <input
                     type="text"
-                    id="artist"
                     name="artist"
                     value={formData.artist}
                     onChange={handleChange}
-                    className={`form-control ${formErrors.artist && 'is-invalid'}`}
+                    className='form-control'
                 />
-                {formErrors.artist && <div className="invalid-feedback">{formErrors.artist}</div>}
+                {/* {formErrors.artist && <div className="invalid-feedback">{formErrors.artist}</div>} */}
             </div>
             <div className="mb-3">
                 <label htmlFor="price" className="form-label">
@@ -117,26 +149,24 @@ const Form = () => {
                 </label>
                 <input
                     type="number"
-                    id="price"
                     name="price"
                     value={formData.price}
                     onChange={handleChange}
-                    className={`form-control ${formErrors.price && 'is-invalid'}`}
+                    className='form-control'
                 />
-                {formErrors.price && <div className="invalid-feedback">{formErrors.price}</div>}
+                {/* {formErrors.price && <div className="invalid-feedback">{formErrors.price}</div>} */}
             </div>
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">
                     Description:
                 </label>
                 <textarea
-                    id="description"
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
-                    className={`form-control ${formErrors.description && 'is-invalid'}`}
+                    className='form-control'
                 ></textarea>
-                {formErrors.description && <div className="invalid-feedback">{formErrors.description}</div>}
+                {/* {formErrors.description && <div className="invalid-feedback">{formErrors.description}</div>} */}
             </div>
             <div className="mb-3">
                 <label htmlFor="genre" className="form-label">
@@ -144,13 +174,12 @@ const Form = () => {
                 </label>
                 <input
                     type="text"
-                    id="genre"
                     name="genre"
                     value={formData.genre}
                     onChange={handleChange}
-                    className={`form-control ${formErrors.genre && 'is-invalid'}`}
+                    className='form-control'
                 />
-                {formErrors.genre && <div className="invalid-feedback">{formErrors.genre}</div>}
+                {/* {formErrors.genre && <div className="invalid-feedback">{formErrors.genre}</div>} */}
             </div>
             <div className="d-grid">
             <button type="submit">
@@ -158,6 +187,12 @@ const Form = () => {
             </button>
             </div>
         </form>
+            )}
+           {error && (
+          <div className="my-3 p-3 bg-danger text-white">
+            Oops! Something went wrong
+          </div>
+        )}
         </div>
     );
 };
