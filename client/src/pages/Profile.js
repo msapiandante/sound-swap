@@ -10,6 +10,7 @@ function Profile() {
   let user;
   if (data) {
     user = data.user;
+    console.log(user.orders)
   }
   return (
     <>
@@ -52,9 +53,10 @@ function Profile() {
               </div>
             </div>
 
-{/* Order history not styled yet */}
+{/* Order history not  styled */}
             <h2 style={{textAlign: "center"}}>{user.firstName}'s Order History</h2>
-            {user.orders.map((order) => (
+            
+            {/* {user.orders.map((order) => (
               <div key={order._id} className="my-2">
                 <h3>
                   {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
@@ -73,7 +75,7 @@ function Profile() {
                   ))}
                 </div>
               </div>
-            ))}
+            ))} */}
           </>
         ) : null}
       </div>
