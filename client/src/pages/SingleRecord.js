@@ -59,7 +59,7 @@ function SingleRecord() {
         } else {
             dispatch({
                 type: ADD_TO_CART,
-                product: { ...currentUpload, purchaseQuantity: 1 },
+                upload: { ...currentUpload, purchaseQuantity: 1 },
             });
             idbPromise('cart', 'put', { ...currentUpload, purchaseQuantity: 1 });
         }
@@ -73,6 +73,8 @@ function SingleRecord() {
 
         idbPromise('cart', 'delete', { ...currentUpload });
     };
+
+    console.log(currentUpload)
 
     return (
         <>
@@ -88,8 +90,8 @@ function SingleRecord() {
 
                         <p>
                             <strong>Price:</strong>${currentUpload.price}{' '}
-                            <button onClick={addToCart}>Add to Cart</button>
-                            <button
+                            <button className='single-button' onClick={addToCart}>Add to Cart</button>
+                            <button className='single-button'
                                 disabled={!cart.find((p) => p._id === currentUpload._id)}
                                 onClick={removeFromCart}
                             >

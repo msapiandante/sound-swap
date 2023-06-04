@@ -15,7 +15,7 @@ function Profile() {
   return (
     <>
       <div className="container my-1">
-        <Link to="/">
+        <Link to="/" style={{color: "rgb(242, 70, 7)", textDecoration: "none", marginRight: "2rem"}}>
           <FontAwesomeIcon icon={faArrowsLeftRight} />
           Back to Home
         </Link>
