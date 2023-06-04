@@ -67,6 +67,7 @@ const Form = () => {
     };
 
     return (
+        <div className='container my-1'>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label htmlFor="img" className="form-label">
@@ -151,10 +152,13 @@ const Form = () => {
                 />
                 {formErrors.genre && <div className="invalid-feedback">{formErrors.genre}</div>}
             </div>
-            <button type="submit" className="btn btn-primary">
+            <div className="d-grid">
+            <button type="submit">
                 Upload
             </button>
+            </div>
         </form>
+        </div>
     );
 };
 
