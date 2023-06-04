@@ -39,16 +39,19 @@ function UploadItem(item) {
     }
 
     return (
-        <div>
-            <Link to={`/products/${_id}`}>
-                <img
-                    alt={album}
-                    src={`/images/${img}`}
-                />
-                <p>{album}: {artist}</p>
-                <p>${price}</p>
-            </Link>
-            <button onClick={addToCart}>Add to cart</button>
+        <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div className='card upload-card'>
+                <Link to={`/products/${_id}`} style={{ textDecoration: 'none' }}>
+                    <img
+                        alt={album}
+                        src={`/images/${img}`}
+                        className='card-img-top'
+                    />
+                    <p className="card-title upload-text">{album}: {artist}</p>
+                    <p className="upload-text">${price}</p>
+                </Link>
+                <button className="add-cart-button" onClick={addToCart}>Add to cart</button>
+            </div>
         </div>
     );
 };
