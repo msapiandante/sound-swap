@@ -97,6 +97,10 @@ body {
     background-color: rgb(173, 53, 9);
 }
 
+.edit-button:hover {
+    background-color: rgb(173, 53, 9);
+}
+
 .card {
     margin-bottom: .3rem;
 }
