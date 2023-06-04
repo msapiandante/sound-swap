@@ -24,6 +24,9 @@ function Profile() {
             {/* <h2>{user.firstName}'s WishList</h2> */}
             {/* <h3>{user.wishlist}</h3> wishlist component?*/}
             <h2 style={{textAlign: "center"}}>{user.firstName}'s Uploads</h2>
+            
+          <Link to="/form"><button className="edit-button" >Post a New Upload</button></Link>
+
             <div className='record-container'>
               <div className="container">
                 <div className='row'>
@@ -43,6 +46,7 @@ function Profile() {
                             {/* <h4>{upload.price}</h4> */}
 
                           </Link>
+                          <button className="edit-button">Edit</button>
                         </div>
                       </div>
                     // </div>
