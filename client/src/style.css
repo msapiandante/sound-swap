@@ -116,3 +116,13 @@ button {
     background-color:rgb(253, 242, 234);
     width: 10rem;
 }
+
+.single-rec-container {
+    display:flex;
+    flex-direction: row;
+}
+
+.col-container {
+    display: flex;
+    flex-direction: column;
+}

@@ -64,7 +64,7 @@ const httpLink = createHttpLink({
                   element={<Profile />} 
                 />
                 <Route 
-                  path="/results/:id" 
+                  path="/products/:id" 
                   element={<SingleRecord />} 
                 />
                 <Route
