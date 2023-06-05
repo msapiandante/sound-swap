@@ -68,7 +68,7 @@ export const ADD_UPLOAD = gql`
 `;
 export const UPDATE_UPLOAD = gql`
   mutation updateUpload(
-    $id: ID
+    $id: ID!
     $img: String
     $album: String
     $artist: String
@@ -91,7 +91,10 @@ export const UPDATE_UPLOAD = gql`
         artist
         price
         description
-        genre
+        genre {
+          _id
+          name
+        }
     }
 }
 `;

@@ -129,12 +129,12 @@ const resolvers = {
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //genre returning null
-    addUpload: async (parent, {img, album, artist, price, description, genre}, context) => {
+    addUpload: async (parent, args, context) => {
       if (context.user) {
-        const upload = await Upload.create({img, album, artist, price, description, genre});
+        const upload = await Upload.create(args);
 
         await User.findOneAndUpdate(
-          { _id: context.user._id},
+          { id: context.user._id},
           { $push: { uploads: upload } }
         );
 
@@ -152,14 +152,14 @@ const resolvers = {
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
 
-    deleteUpload: async (parent, { uploadId }, context) => {
+    deleteUpload: async (parent, { id }, context) => {
       if (context.user) {
         const upload = await Upload.findOneAndDelete({
-          _id: uploadId,
+          _id: id,
         });
         await User.findOneAndUpdate(
           { id: context.user._id },
-          { $pull: { uploads: upload._id } }
+          { $pull: { uploads: id } }
         );
         return upload;
      }

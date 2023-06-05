@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import {useParams} from 'react-router-dom'
 import {useMutation} from '@apollo/client';
 import {UPDATE_UPLOAD} from '../utils/mutations';
 
@@ -7,7 +8,9 @@ import {Link} from 'react-router-dom';
 
 
 const UpdateForm = () => {
+    const {uploadId} = useParams()
     const [formState, setFormState] = useState({
+        _id: uploadId, 
         img: '',
         album: '',
         artist: '',
@@ -31,7 +34,7 @@ const UpdateForm = () => {
         console.log(formState);
         try {
          const upload= await updateUpload({
-                variables: {...formState}
+                variables: {id: uploadId, ...formState}
             });
                 return upload;
         } catch (error) {

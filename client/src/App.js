@@ -73,7 +73,7 @@ const httpLink = createHttpLink({
                   element={<Form />}
                 />
                   <Route
-                  path="/updateform"
+                  path="/updateform/:uploadId"
                   element={<UpdateForm />}
                 />
                 <Route 
