@@ -59,7 +59,7 @@ const handleDelete = async (id) => {
                             {/* <h4>{upload.price}</h4> */}
 
                           </Link>
-                         <Link to='/updateform'> <button className="edit-button">Edit</button></Link>
+                          <Link to={`/updateform/${upload._id}`}> <button className="edit-button">Edit</button></Link> 
                           <button onClick={() => handleDelete(upload._id)} className="edit-button">Delete</button>
                         </div>
                       </div>
@@ -72,7 +72,7 @@ const handleDelete = async (id) => {
             </div>
 
 {/* Order history not  styled */}
-            <h2 style={{textAlign: "center"}}>{user.firstName}'s Order History</h2>
+            {/* <h2 style={{textAlign: "center"}}>{user.firstName}'s Order History</h2> */}
             
             {/* {user.orders.map((order) => (
               <div key={order._id} className="my-2">

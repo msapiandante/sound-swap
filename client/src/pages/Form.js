@@ -3,6 +3,7 @@ import {useMutation} from '@apollo/client';
 import {ADD_UPLOAD} from '../utils/mutations';
 import {Link} from 'react-router-dom';
 
+
 const Form = () => {
     const [formData, setFormData] = useState({
         img: '',
@@ -30,6 +31,7 @@ const Form = () => {
          const upload= await addUpload({
                 variables: {...formData}
             });
+                window.document.reload()
                 return upload;
         } catch (error) {
             console.error(error)
