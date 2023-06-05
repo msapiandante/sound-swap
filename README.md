@@ -18,7 +18,7 @@ An online marketplace to buy and sell records, albums, and CDs. Users can upload
 
 ## Usage
 ![sound-swap](https://github.com/msapiandante/sound-swap/assets/126308793/fa828356-4aff-4091-bdf3-0a0409898650)
-//insert deployed link 
+deployed link: https://guarded-shelf-89712.herokuapp.com/
 
 
 ## Credits
