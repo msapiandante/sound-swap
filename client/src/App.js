@@ -19,6 +19,7 @@ import Nav from './components/Nav';
 import Cart from './components/Cart';
 import Form from './pages/Form';
 import { StoreProvider } from './utils/GlobalState';
+import UpdateForm from './pages/EditForm'
 
 const httpLink = createHttpLink({
     uri: '/graphql',
@@ -70,6 +71,10 @@ const httpLink = createHttpLink({
                 <Route
                   path="/form"
                   element={<Form />}
+                />
+                  <Route
+                  path="/updateform"
+                  element={<UpdateForm />}
                 />
                 <Route 
                   path="/cart" 

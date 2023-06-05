@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsLeftRight } from "@fortawesome/free-solid-svg-icons";
-import { DELETE_UPLOAD } from "../utils/mutations";
+import { DELETE_UPLOAD} from "../utils/mutations";
 
 function Profile() {
   const { data } = useQuery(QUERY_USER);
@@ -18,7 +18,7 @@ const [deleteUpload] = useMutation(DELETE_UPLOAD);
 const handleDelete = async () => {
  try {
   await deleteUpload ({
-    variables: user.uploads._id
+    variables: data.uploads
   });
   window.location.reload()
  } catch (error) {
@@ -59,8 +59,8 @@ const handleDelete = async () => {
                             {/* <h4>{upload.price}</h4> */}
 
                           </Link>
-                          <button className="edit-button">Edit</button>
-                          <button onClick={() => handleDelete(upload._id)} className="edit-button">Delete</button>
+                         <Link to='/updateform'> <button className="edit-button">Edit</button></Link>
+                          <button onClick={() => handleDelete(upload)} className="edit-button">Delete</button>
                         </div>
                       </div>
                     // </div>
