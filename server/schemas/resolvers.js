@@ -152,14 +152,14 @@ const resolvers = {
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
 
-    deleteUpload: async (parent, { uploadId }, context) => {
+    deleteUpload: async (parent, { id }, context) => {
       if (context.user) {
         const upload = await Upload.findOneAndDelete({
-          _id: uploadId,
+          _id: id,
         });
         await User.findOneAndUpdate(
           { id: context.user._id },
-          { $pull: { uploads: upload._id } }
+          { $pull: { uploads: id } }
         );
         return upload;
      }

@@ -15,10 +15,10 @@ function Profile() {
   };
 const [deleteUpload] = useMutation(DELETE_UPLOAD);
 
-const handleDelete = async () => {
+const handleDelete = async (id) => {
  try {
   await deleteUpload ({
-    variables: data.uploads
+    variables: {id: id}
   });
   window.location.reload()
  } catch (error) {
@@ -60,7 +60,7 @@ const handleDelete = async () => {
 
                           </Link>
                          <Link to='/updateform'> <button className="edit-button">Edit</button></Link>
-                          <button onClick={() => handleDelete(upload)} className="edit-button">Delete</button>
+                          <button onClick={() => handleDelete(upload._id)} className="edit-button">Delete</button>
                         </div>
                       </div>
                     // </div>
