@@ -51,7 +51,7 @@ const Cart = () => {
 
     state.cart.forEach((upload) => {
 
-        uploadIds.push(upload);
+        uploadIds.push(upload._id);
       
     });
     getCheckout({

@@ -1,17 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsLeftRight } from "@fortawesome/free-solid-svg-icons";
+import { DELETE_UPLOAD} from "../utils/mutations";
 
 function Profile() {
   const { data } = useQuery(QUERY_USER);
   let user;
   if (data) {
     user = data.user;
-    console.log(user.orders)
-  }
+    console.log(user.uploads)
+  };
+const [deleteUpload] = useMutation(DELETE_UPLOAD);
+
+const handleDelete = async () => {
+ try {
+  await deleteUpload ({
+    variables: data.uploads
+  });
+  window.location.reload()
+ } catch (error) {
+  console.log(error)
+ }
+}
   return (
     <>
       <div className="container my-1">
@@ -32,7 +45,7 @@ function Profile() {
                 <div className='row'>
                   {user.uploads.map((upload) => (
                     // <div className="col-md-3">
-                      <div className="col-6 col-md-4 col-lg-2 mb-4">
+                      <div className="col-6 col-md-4 col-lg-2 mb-4" key={upload._id}>
                         <div className='card profile-card'>
                           <Link to={`/products/${upload._id}`} style={{ textDecoration: 'none' }}>
                             {/*                 
@@ -46,8 +59,8 @@ function Profile() {
                             {/* <h4>{upload.price}</h4> */}
 
                           </Link>
-                          <button className="edit-button">Edit</button>
-                          <button className="edit-button">Delete</button>
+                         <Link to='/updateform'> <button className="edit-button">Edit</button></Link>
+                          <button onClick={() => handleDelete(upload)} className="edit-button">Delete</button>
                         </div>
                       </div>
                     // </div>

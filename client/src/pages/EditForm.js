@@ -1,105 +1,50 @@
+
 import React, { useState } from 'react';
 import {useMutation} from '@apollo/client';
-import {ADD_UPLOAD} from '../utils/mutations';
+import {UPDATE_UPLOAD} from '../utils/mutations';
+
 import {Link} from 'react-router-dom';
 
-const Form = () => {
-    const [formData, setFormData] = useState({
+
+const UpdateForm = () => {
+    const [formState, setFormState] = useState({
         img: '',
         album: '',
         artist: '',
         price: '',
         description: '',
-        genre: ''
+        genre: '',
     });
-    const [addUpload, {error, data}] = useMutation(ADD_UPLOAD)
+    const [updateUpload, {error, data}] = useMutation(UPDATE_UPLOAD)
 
     const handleChange = (event) => {
        const {name, value} = event.target;
 
-       setFormData({
-        ...formData,
+       setFormState({
+        ...formState,
         [name]: value,
        });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData);
+        console.log(formState);
         try {
-         const upload= await addUpload({
-                variables: {...formData}
+         const upload= await updateUpload({
+                variables: {...formState}
             });
                 return upload;
         } catch (error) {
             console.error(error)
         }
     };
+   
 
-    // const [formErrors, setFormErrors] = useState(
-    //     {}
-    // );
-
-    // const handleChange = (e) => {
-    //     setFormData({ ...formData, [e.target.name]: [e.target.value] })
-    // };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    
-    //     const {data} = await addUpload
-    //     let errors = {};
-    //     let hasErrors = false;
-
-         // Check for null values
-    //     if (formData.img.trim() === '') {
-    //         errors.img = 'Image URL is required';
-    //         hasErrors = true;
-    //     }
-    //     if (formData.album.trim() === '') {
-    //         errors.album = 'Album is required';
-    //         hasErrors = true;
-    //     }
-    //     if (formData.artist.trim() === '') {
-    //         errors.artist = 'Artist is required';
-    //         hasErrors = true;
-    //     }
-    //     if (formData.price === 0) {
-    //         errors.price = 'Price is required';
-    //         hasErrors = true;
-    //     }
-    //     if (formData.description.trim() === '') {
-    //         errors.description = 'Description is required';
-    //         hasErrors = true;
-    //     }
-    //     if (formData.genre.trim() === '') {
-    //         errors.genre = 'Genre is required';
-    //         hasErrors = true;
-    //     }
-
-    //     if (hasErrors) {
-    //         setFormErrors(errors);
-    //         return;
-    //     }
-
-         // Perform upload logic or send the formData to the server
-    //     console.log(formData);
-         // Reset the form after submission
-    //     setFormData({
-    //         img: '',
-    //         album: '',
-    //         artist: '',
-    //         price: 0,
-    //         description: '',
-    //         genre: ''
-    //     });
-    // };
-
-    return (
-        <div className='container my-1'>
+return (
+    <div className='container my-1'>
             {data ? (
                 <p>
-                    Succesfully uploaded! You may now head {''}
+                    Succesfully updated! You may now head {''}
                     <Link to='/profile'>back to your profile</Link>
                 </p>
             ) : (
@@ -111,7 +56,7 @@ const Form = () => {
                 <input
                     type="text"
                     name="img"
-                    value={formData.img}
+                    value={formState.img}
                     onChange={handleChange}
                     className='form-control'
                 />
@@ -124,7 +69,7 @@ const Form = () => {
                 <input
                     type="text"
                     name="album"
-                    value={formData.album}
+                    value={formState.album}
                     onChange={handleChange}
                     className='form-control'
                 />
@@ -137,7 +82,7 @@ const Form = () => {
                 <input
                     type="text"
                     name="artist"
-                    value={formData.artist}
+                    value={formState.artist}
                     onChange={handleChange}
                     className='form-control'
                 />
@@ -150,7 +95,7 @@ const Form = () => {
                 <input
                     type="number"
                     name="price"
-                    value={formData.price}
+                    value={formState.price}
                     onChange={handleChange}
                     className='form-control'
                 />
@@ -162,7 +107,7 @@ const Form = () => {
                 </label>
                 <textarea
                     name="description"
-                    value={formData.description}
+                    value={formState.description}
                     onChange={handleChange}
                     className='form-control'
                 ></textarea>
@@ -175,7 +120,7 @@ const Form = () => {
                 <input
                     type="text"
                     name="genre"
-                    value={formData.genre}
+                    value={formState.genre}
                     onChange={handleChange}
                     className='form-control'
                 />
@@ -194,7 +139,8 @@ const Form = () => {
           </div>
         )}
         </div>
-    );
-};
+  );
 
-export default Form;
+}
+
+export default UpdateForm;

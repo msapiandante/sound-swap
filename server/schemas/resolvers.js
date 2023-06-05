@@ -49,30 +49,36 @@ const resolvers = {
       throw new AuthenticationError("Oops! You need to log in!");
     },
     checkout: async (parent, args, context) => {
+      console.log("Got here");
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ uploads: args.uploads });
       const line_items = [];
 
       const { uploads } = await order.populate("uploads");
+      console.log(uploads);
 
       for (let i = 0; i < uploads.length; i++) {
+        console.log("got here");
         const upload = await stripe.products.create({
-          album: uploads[i].album,
+          name: uploads[i].album,
           description: uploads[i].description,
-          imgs: [`${url}/images/${uploads[i].img}`],
+          images: [`${url}/images/${uploads[i].img}`],
         });
+        console.log("I'm upload", upload);
 
         const price = await stripe.prices.create({
-          upload: upload.id,
+          product: upload.id,
           unit_amount: uploads[i].price * 100,
           currency: "usd",
         });
+        console.log("I'm price", price);
 
         line_items.push({
           price: price.id,
           quantity: 1,
         });
       }
+      console.log("I'm line items", line_items);
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items,
@@ -80,6 +86,7 @@ const resolvers = {
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${url}/`,
       });
+      console.log(session);
       return { session: session.id };
     },
   },
@@ -122,12 +129,12 @@ const resolvers = {
       throw new AuthenticationError("Oops! You need to log in!");
     },
     //genre returning null
-    addUpload: async (parent, args, context) => {
+    addUpload: async (parent, {img, album, artist, price, description, genre}, context) => {
       if (context.user) {
-        const upload = await Upload.create(args);
+        const upload = await Upload.create({img, album, artist, price, description, genre});
 
         await User.findOneAndUpdate(
-          { id: context.user._id},
+          { _id: context.user._id},
           { $push: { uploads: upload } }
         );
 
@@ -150,10 +157,11 @@ const resolvers = {
         const upload = await Upload.findOneAndDelete({
           _id: uploadId,
         });
-        return await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
           { id: context.user._id },
-          { $pull: { uploads: upload } }
+          { $pull: { uploads: upload._id } }
         );
+        return upload;
      }
       throw new AuthenticationError("Oops! You need to be logged in!");
     },
