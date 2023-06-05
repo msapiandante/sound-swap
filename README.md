@@ -33,7 +33,7 @@ An online marketplace to buy and sell records, albums, and CDs. Users can upload
 
 MIT License
 
-Copyright (c) 2023 kendrafitzgerald
+Copyright (c) 2023 Melanie Sapiandante
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
